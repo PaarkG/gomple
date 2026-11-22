@@ -4,5 +4,5 @@ interface CellProps {
 }
 
 export default function({ char, color }: CellProps) {
-    return <div className="cell" style={{backgroundColor: color}}>{char}</div>
+    return <div className={ color == "neutral" ? "cell" : color + "Cell"}>{char}</div>
 }
