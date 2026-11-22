@@ -6,7 +6,7 @@ interface RowProps {
 }
 
 function getColor(char: string, desiredChar: string, submitted: boolean) {
-    return !submitted ? "neutral" : char == desiredChar ? "green" : ["G", "O", "M", "P", "E", "I"].includes(char) ? "yellow" : "red"
+    return !submitted ? "neutral" : char == desiredChar ? "green" : ["G", "O", "M", "P", "E", "I"].includes(char) ? "yellow" : "gray"
 }
 
 export default function({ word, submitted }: RowProps) {

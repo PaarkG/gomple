@@ -9,10 +9,15 @@
   margin: 50px 30%;
 }
 
-
-h1, h2, h3 {
-  width: 100%;
+.game > * {
   text-align: center;
+  width: auto;
+  padding: 0;
+  margin: 5px 5px;
+}
+
+h2, h3 {
+  font-weight: normal;
 }
 
 .grid {
@@ -30,7 +35,7 @@ h1, h2, h3 {
   height: fit-content;
 }
 
-.cell, .greenCell, .yellowCell, .redCell {
+.cell, .greenCell, .yellowCell, .grayCell {
   box-sizing: border-box;
   border: 2px black solid;
   aspect-ratio: 1 / 1;
@@ -45,13 +50,13 @@ h1, h2, h3 {
 }
 
 .greenCell {
-  background-color: green;
+  background-color: rgb(66, 194, 66);
 }
 
 .yellowCell {
-  background-color: yellow;
+  background-color: rgb(248, 248, 126);
 }
 
-.redCell {
-  background-color: red;
+.grayCell {
+  background-color: rgb(146, 146, 146);
 }
