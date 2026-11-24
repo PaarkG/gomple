@@ -2,11 +2,12 @@ import { useState, useEffect } from "react"
 import Row from "./Row";
 
 interface GridProps {
+    alreadyWon: boolean,
     setWon: (won: boolean) => void
 }
 
-const Grid = ({ setWon }: GridProps) => {
-    const [ words, setWords ] = useState([{ word: "", submitted: false}]);
+const Grid = ({ alreadyWon, setWon }: GridProps) => {
+    const [words, setWords] = useState([{ word: "", submitted: false }]);
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -40,17 +41,20 @@ const Grid = ({ setWon }: GridProps) => {
 
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [ setWon ]);
+    }, [setWon]);
 
 
 
-    return <div className="grid">
+    return alreadyWon ? 
+    (<div className="grid">
         {
             words.map((word, i) => (
                 <Row key={i} word={word.word} submitted={word.submitted} />
             ))
         }
-    </div>;
-}
+    </div>) 
+    : 
+    (<Row key={0} word={"GOMPEI"} submitted={true} />)
+};
 
 export default Grid;
