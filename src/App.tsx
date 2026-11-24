@@ -4,11 +4,16 @@ import Grid from './components/Grid'
 
 if (localStorage.getItem("gomple_streak") == null) localStorage.setItem("gomple_streak", "0");
 const storedStreak = localStorage.getItem("gomple_streak");
-const streak = storedStreak == null ? 0 : parseInt(storedStreak);
+let streak = storedStreak == null ? 0 : parseInt(storedStreak);
 
 if (localStorage.getItem("gomple_last_win") == null) localStorage.setItem("gomple_last_win", "0");
 const lastWinString = localStorage.getItem("gomple_last_win");
 const lastWin = lastWinString == null ? 0 : parseInt(lastWinString);
+
+if (Date.now() - lastWin > 24 * 60 * 60 * 1000) {
+  streak = 0;
+  localStorage.setItem("gomple_streak", "0");
+}
 
 function wasOneDayAgo(time: number) {
   return (Date.now() - time) > (24 * 60 * 60 * 1000);
