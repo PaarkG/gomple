@@ -5,7 +5,7 @@ interface GridProps {
     setWon: (won: boolean) => void
 }
 
-export default function({ setWon }: GridProps) {
+const Grid = ({ setWon }: GridProps) => {
     const [ words, setWords ] = useState([{ word: "", submitted: false}]);
 
     useEffect(() => {
@@ -40,7 +40,9 @@ export default function({ setWon }: GridProps) {
 
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, []);
+    }, [ setWon ]);
+
+
 
     return <div className="grid">
         {
@@ -50,3 +52,5 @@ export default function({ setWon }: GridProps) {
         }
     </div>;
 }
+
+export default Grid;

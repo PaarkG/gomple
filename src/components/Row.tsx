@@ -10,7 +10,7 @@ function getColor(char: string, desiredChar: string, submitted: boolean) {
     return !submitted ? "neutral" : char == desiredChar ? "green" : ["G", "O", "M", "P", "E", "I"].includes(char) ? "yellow" : "gray"
 }
 
-export default function({ word, submitted }: RowProps) {
+const Row = ({ word, submitted }: RowProps) => {
     const [yOffset, setYOffset] = useState([0, 0, 0, 0, 0, 0]);
 
     const chars = [...word, ..." ".repeat(6)];
@@ -21,16 +21,14 @@ export default function({ word, submitted }: RowProps) {
         if (submitted) {
             for (let i = 0; i < 6; i++) {
                 setTimeout(() => {
-                    console.log(i);
                     setYOffset(prevOffsets => {
                         const newOffsets = [...prevOffsets];
-                        newOffsets[i] = -10;
+                        newOffsets[i] = -8;
                         return newOffsets;
                     })
                 }, 50 * i);
 
                 setTimeout(() => {
-                    console.log(i);
                     setYOffset(prevOffsets => {
                         const newOffsets = [...prevOffsets];
                         newOffsets[i] = 0;
@@ -41,9 +39,6 @@ export default function({ word, submitted }: RowProps) {
         }
     }, [ submitted ]);
 
-    console.log(chars);
-    console.log(colors);
-
     return <div className="row">
         <Cell char={chars[0]} color={colors[0]} yOffset={yOffset[0]} />
         <Cell char={chars[1]} color={colors[1]} yOffset={yOffset[1]} />
@@ -53,3 +48,5 @@ export default function({ word, submitted }: RowProps) {
         <Cell char={chars[5]} color={colors[5]} yOffset={yOffset[5]} />
     </div>
 }
+
+export default Row;
