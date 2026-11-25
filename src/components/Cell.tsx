@@ -4,6 +4,8 @@ interface CellProps {
     yOffset: number
 }
 
-export default function({ char, color, yOffset }: CellProps) {
+const Cell = ({ char, color, yOffset }: CellProps) => {
     return <div className={ color == "neutral" ? "cell" : color + "Cell"} style={{translate: "0 " + yOffset + "px"}}>{char}</div>
 }
+
+export default Cell;

@@ -10,6 +10,8 @@ if (localStorage.getItem("gomple_last_win") == null) localStorage.setItem("gompl
 const lastWinString = localStorage.getItem("gomple_last_win");
 const lastWin = lastWinString == null ? 0 : parseInt(lastWinString);
 
+const wonBeforeLoad = !wasOneDayAgo(lastWin);
+
 if (Date.now() - lastWin > 24 * 60 * 60 * 1000) {
   streak = 0;
   localStorage.setItem("gomple_streak", "0");
@@ -21,7 +23,6 @@ function wasOneDayAgo(time: number) {
 
 function App() {
   const [won, setWon] = useState(!wasOneDayAgo(lastWin));
-  const wonBeforeLoad = won;
 
   useEffect(() => {
     if (won && wasOneDayAgo(lastWin)) {
@@ -33,14 +34,14 @@ function App() {
   return (
     <div className="game">
       <h1>Gomple</h1>
-      { wonBeforeLoad ? (<h2>Silly goose, you already won today!</h2>) : (<h2>Can you guess the word today?</h2>)}
+      { won ? (<h2>Good work today. Come back tomorrow!</h2>) : (<h2>Can you guess the word today?</h2>)}
       
       <Grid setWon={setWon} alreadyWon={wasOneDayAgo(lastWin)} />
       
       <h3>{won ? "Awesome job! Come back later to try again!" : "Keep trying! I believe in you."}</h3>
       <p>{streak == 0 && !won ? "Today is the start of something great.." : "Wow, you have a streak of "
-        + (streak + (won ? 1 : 0)) + "!"
-        + ((streak + (won ? 1 : 0)) >= 3 ? "🔥" : "")}</p>
+        + (streak + (!wonBeforeLoad && won ? 1 : 0)) + "!"
+        + ((streak + (!wonBeforeLoad && won ? 1 : 0)) >= 3 ? "🔥" : "")}</p>
       <p><small>Gomple is presented by <em>&lt;your browser&gt;</em>. Mobile support coming soon.</small></p>
     </div>
   )
