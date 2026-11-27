@@ -3,16 +3,19 @@ import Row from "./Row";
 
 interface GridProps {
     alreadyWon: boolean,
-    setWon: (won: boolean) => void
+    onWon: () => void
 }
 
-const Grid = ({ alreadyWon, setWon }: GridProps) => {
+const Grid = ({ alreadyWon, onWon }: GridProps) => {
     const [words, setWords] = useState([{ word: "", submitted: false }]);
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.repeat) return;
             const key = event.key.toUpperCase();
+
+            if (key == "ENTER" && words[words.length - 1].word === "GOMPEI") onWon();
+
             setWords(prevWords => {
                 const lastWordIndex = prevWords.length - 1;
                 const lastWord = prevWords[lastWordIndex];
@@ -27,7 +30,7 @@ const Grid = ({ alreadyWon, setWon }: GridProps) => {
                 } else if (key == "ENTER" && prevWords[prevWords.length - 1].word.length == 6) {
                     if (prevWords[newWords.length - 1].word != "GOMPEI") {
                         newWords = [...newWords, { word: "", submitted: false }];
-                    } else setWon(true);
+                    }
                     newWords[lastWordIndex] = { word: lastWord.word, submitted: true };
                 } else if (key == "BACKSPACE" && prevWords[prevWords.length - 1].word.length > 0 && !lastWord.submitted) {
                     newWords[lastWordIndex] = {
@@ -41,20 +44,18 @@ const Grid = ({ alreadyWon, setWon }: GridProps) => {
 
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [setWon]);
-
-
+    });
 
     return alreadyWon ? 
-    (<div className="grid">
-        {
-            words.map((word, i) => (
-                <Row key={i} word={word.word} submitted={word.submitted} />
-            ))
-        }
-    </div>) 
+        (<div className="grid">
+            {
+                words.map((word, i) => (
+                    <Row key={i} word={word.word} submitted={word.submitted} />
+                ))
+            }
+        </div>) 
     : 
-    (<Row key={0} word={"GOMPEI"} submitted={true} />)
+        (<Row key={0} word={"GOMPEI"} submitted={true} />)
 };
 
 export default Grid;
