@@ -52,7 +52,7 @@ function App() {
       
       <Grid onWon={handleWin} alreadyWon={wasBeforeToday(lastWin)} />
       
-      <h3>{won ? "Awesome job! Come back later to try again!" : "Keep trying! I believe in you."}</h3>
+      <h3>{won ? "Awesome job! Come back later to try again!" : "Welcome to Gomple! Try typing a word."}</h3>
       <p>{streak == 0 && !won ? "Today is the start of something great.." : "Wow, you have a streak of " + streak + "!" + (streak >= 3 ? "🔥" : "")}</p>
       <p><small>Gomple is presented by <em>&lt;your browser&gt;</em>. Mobile support coming soon.</small></p>
     </div>
