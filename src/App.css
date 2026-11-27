@@ -48,7 +48,7 @@ h2, h3 {
   
   font-size: 3vw;
 
-  transition: transform 0.2s linear;
+  transition: translate 0.2s linear;
 }
 
 .greenCell {
