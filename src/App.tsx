@@ -19,18 +19,6 @@ const getStartOfToday = () => {
 }
 
 function App() {
-  // store defaults if first time opening site or local storage has been cleared
-  // if (localStorage.getItem("gomple_streak") == null) localStorage.setItem("gomple_streak", "0");
-  // if (localStorage.getItem("gomple_last_win") == null) localStorage.setItem("gomple_last_win", "0");
-
-  // local storage variables
-  // const storedStreak = localStorage.getItem("gomple_streak");
-  // const lastWinString = localStorage.getItem("gomple_last_win");
-  
-  // state variables
-  // const [streak, setStreak] = useState(storedStreak == null ? 0 : parseInt(storedStreak))
-  // const [lastWin, setLastWin] = useState(lastWinString == null ? 0 : parseInt(lastWinString));
-  // const [won, setWon] = useState(!wasBeforeToday(lastWin));
 
   const [lastWin, setLastWin] = useState(Number(localStorage.getItem("gomple_last_win") ?? 0));
 
@@ -41,13 +29,7 @@ function App() {
   const [won, setWon] = useState(!wasBeforeToday(lastWin));
 
   if (streakExpired) localStorage.setItem("gomple_streak", "0");
-
-  // reset streak if it has been over a day since the last win
-  // if (getStartOfToday() - (24 * 60 * 60 * 1000) > lastWin) {
-  //   setStreak(0);
-  //   localStorage.setItem("gomple_streak", "0");
-  // }
-
+  
   // handler to update when won, passed to grid
   const handleWin = () => {
     setWon(true);
